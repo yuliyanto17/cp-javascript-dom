@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form ke Tabel</title>
+</head>
+<body>
+  <h2>Form Input Nama</h2>
+
+  <label for="nama">Nama:</label> </n>
+  <input type="text" id="nama" placeholder="Masukkan nama">
+  <label for="umur">Umur:</label> 
+  <input type="number" id="umur" placeholder="Umur">
+  <button onclick="tambahKeTabel()">Tambah</button>
+
+  <p id="peringatan" style="color: red;"></p>
+
+  <h3>Daftar Nama:</h3>
+  <table border="1" cellpadding="8">
+    <thead>
+      <tr>
+        <th>No</th>
+        <th>Nama</th>
+        <th>Umur</th>
+      </tr>
+    </thead>
+    <tbody id="isi-tabel">
+      <!-- Baris nama akan ditambahkan di sini -->
+    </tbody>
+  </table>
+
+  <script>
+    let nomor = 1;
+
+    function tambahKeTabel() {
+      const input = document.getElementById("nama");
+      const inputUmur = document.getElementById("umur");
+      const nama = input.value.trim(); // Hapus spasi depan-belakang
+      const umur = inputUmur.value.trim(); // Hapus spasi depan-belakang
+      const peringatan = document.getElementById("peringatan");
+
+      if (nama === "" || umur === "") {
+        peringatan.innerText = "Nama dan umur tidak boleh kosong!";
+        return;
+      }
+
+      peringatan.innerText = ""; // Kosongkan peringatan
+
+      // Tambah baris ke tabel
+      const tbody = document.getElementById("isi-tabel");
+      const baris = document.createElement("tr");
+
+      baris.innerHTML = `
+        <td>${nomor}</td>
+        <td>${nama}</td>
+        <td>${umur}</td>
+      `;
+
+      tbody.appendChild(baris);
+
+      // Reset input dan naikkan nomor
+      input.value = "";
+      umur.value = "";
+      nomor++;
+    }
+  </script>
+</body>
+</html>
